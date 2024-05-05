@@ -1,10 +1,32 @@
+import { EdtechServiceInterface } from "@/core/domain/edtech.abstraction";
 import { EdtechQueryInterface } from "./edtech.abstraction";
+import { INVALID_INPUT, NOT_FOUND } from "@/core/constant/edtech.constant";
 
 export class EdtechQuery implements EdtechQueryInterface {
-  list(): string[] {
-    throw new Error("Method not implemented.");
+  private _service;
+  constructor(edtechService: EdtechServiceInterface) {
+    this._service = edtechService;
   }
-  get(id: string): string {
+  async list(): Promise<string[]> {
+    return await this._service.list();
+  }
+  async get(id: string): Promise<string> {
+    return await this._service.get(id);
+  }
+  async login(email: string, password: string): Promise<any> {
+    if (!email || !password) {
+      return `Login - ${INVALID_INPUT}`;
+    }
+
+    const user = await this._service.getUser(email);
+    if (!user) {
+      return `Login ${NOT_FOUND}`;
+    }
+
+    return Math.random().toString(36);
+  }
+
+  async downloadMateri(userId: string, filePath: string): Promise<string> {
     throw new Error("Method not implemented.");
   }
 }

@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "commit": "git-cz",
+    "generate": "prisma generate",
     "postinstall": "husky install"
   },
   "config": {
