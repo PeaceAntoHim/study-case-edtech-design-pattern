@@ -7,7 +7,9 @@ export default async function handle(
   if (req.method === "POST") {
     const { email, password } = req.body;
     const payload = await query.login(email, password);
-    res.setHeader("Token", payload);
+    res.setHeader("Set-Cookie", `token=${payload.token}; HttpOnly`);
+    res.setHeader("Set-Cookie", `email=${payload.email}; HttpOnly`);
+    res.setHeader("Set-Cookie", `role=${payload.role}; HttpOnly`);
     return res.status(200).json(payload);
   } else {
     return res.status(405).json({ message: "Method Not allowed" });

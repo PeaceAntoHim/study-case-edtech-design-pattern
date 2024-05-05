@@ -23,7 +23,11 @@ export class EdtechQuery implements EdtechQueryInterface {
       return `Login ${NOT_FOUND}`;
     }
 
-    return Math.random().toString(36);
+    return {
+      token: Math.random().toString(36),
+      email: user.email,
+      role: user.role,
+    };
   }
 
   async downloadMateri(userId: string, filePath: string): Promise<string> {
