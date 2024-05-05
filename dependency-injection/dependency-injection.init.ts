@@ -5,7 +5,7 @@ declare global {
   var prisma: PrismaClient | undefined;
 }
 
-const prismaConnection = (): PrismaClient => {
+export const prismaConnection = (): PrismaClient => {
   try {
     let prisma: PrismaClient;
 
@@ -26,7 +26,7 @@ const prismaConnection = (): PrismaClient => {
   }
 };
 
-const validateEmail = (param: string): boolean => {
+export const validateEmail = (param: string): boolean => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(param);
 };

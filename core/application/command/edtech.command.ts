@@ -1,27 +1,18 @@
-import { TutorServiceInterface } from "../../domain/edtech.abstraction";
-import { EdtecgCommandInterface } from "./edtech.abstraction";
+import { EdtechServiceInterface } from "../../domain/edtech.abstraction";
+import { EdtechCommandInterface } from "./edtech.abstraction";
 
-export class TutorCommand implements EdtecgCommandInterface {
+export class EdtechCommand implements EdtechCommandInterface {
   private _service;
-  constructor(tutorService: TutorServiceInterface) {
-    this._service = tutorService;
-  }
-  downloadMateri(userId: string, filePath: string): string {
-    throw new Error("Method not implemented.");
-  }
-  get(id: string): string {
-    throw new Error("Method not implemented.");
+  constructor(edtechService: EdtechServiceInterface) {
+    this._service = edtechService;
   }
 
-  list(): string[] {
-    throw new Error("Method not implemented.");
+  async signup(name: string, role: string, email: string, password: string): Promise<string> {
+    const user = await this._service.addUser(name, role, email, password);
+    return `Welcome ${user.name} please login with this email: ${user.email}`;
   }
 
-  login(): void {
-    throw new Error("Method not implemented.");
-  }
-
-  uploadMateri(): string {
+  async uploadMateri(userId: string, filePath: string): Promise<string> {
     throw new Error("Method not implemented.");
   }
 }

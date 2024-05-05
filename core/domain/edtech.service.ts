@@ -1,13 +1,27 @@
-import { TutorServiceInterface } from "./edtech.abstraction";
+import { EdtechRepository } from "../infrastructure/repository/edtech.repository";
+import { EdtechServiceInterface } from "./edtech.abstraction";
 
-export class TutorSevice implements TutorServiceInterface {
-  list(): string[] {
-    throw new Error("Method not implemented.");
+export class EdtechService implements EdtechServiceInterface {
+  _repository: EdtechRepository;
+  constructor(repository: EdtechRepository) {
+    this._repository = repository;
   }
-  get(id: string): string {
-    throw new Error("Method not implemented.");
+  async addUser(name: string, role: string, email: string, password: string): Promise<any> {
+    return await this._repository.insertUser(name, role, email, password);
   }
-  add(): string {
-    throw new Error("Method not implemented.");
+  async getUser(email: string): Promise<any> {
+    return await this._repository.findUser(email);
+  }
+
+  async list(): Promise<string[]> {
+    return await this._repository.findAll();
+  }
+
+  async get(id: string): Promise<string> {
+    return await this._repository.find(id);
+  }
+
+  async add(pathFile: string): Promise<string> {
+    return await this._repository.insert(pathFile);
   }
 }
