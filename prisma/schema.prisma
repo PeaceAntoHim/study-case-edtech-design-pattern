@@ -47,59 +47,15 @@ model VerificationToken {
   @@map("verificationtokens")
 }
 
-model Complaint {
+model Materi {
   id                String   @id @default(cuid())
   userId            String
-  addresses         String
-  categoryComplaint String
-  notes             String
+  material          String
   createdAt         DateTime @default(now()) @map("created_at")
   updatedAt         DateTime @updatedAt @map("updated_at")
   user              User     @relation(fields: [userId], references: [id])
 
-  @@map("complaints")
-}
-
-model Payment {
-  id              String   @id @default(cuid())
-  name            String
-  userId          String
-  paymentHours    DateTime @default(now())
-  bankAccountName String
-  createdAt       DateTime @default(now()) @map("created_at")
-  updatedAt       DateTime @updatedAt @map("updated_at")
-  addresses       String
-  bankName        String
-  transferAmount  Int
-  user            User     @relation(fields: [userId], references: [id])
-
-  @@map("payments")
-}
-
-model Booking {
-  id          String   @id @default(cuid())
-  name        String
-  phoneNumber String
-  email       String
-  message     String
-  propertyId  Int?
-  agreement   Boolean? @default(true)
-  createdAt   DateTime @default(now()) @map("created_at")
-  updatedAt   DateTime @updatedAt @map("updated_at")
-
-  @@map("bookings")
-}
-
-model PdfGuide {
-  id          String   @id @default(cuid())
-  name        String
-  phoneNumber String
-  email       String
-  createdAt   DateTime @default(now()) @map("created_at")
-  updatedAt   DateTime @updatedAt @map("updated_at")
-  agreement   Boolean? @default(true)
-
-  @@map("pdfguides")
+  @@map("materis")
 }
 
 model User {
@@ -112,8 +68,7 @@ model User {
   createdAt     DateTime    @default(now()) @map("created_at")
   updatedAt     DateTime    @updatedAt @map("updated_at")
   accounts      Account[]
-  complaints    Complaint[]
-  payments      Payment[]
+  materis    Materi[]
   sessions      Session[]
 
   @@map("users")
