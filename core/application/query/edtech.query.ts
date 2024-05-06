@@ -10,10 +10,16 @@ export class EdtechQuery implements EdtechQueryInterface {
   async list(): Promise<string[]> {
     return await this._service.list();
   }
-  async get(id: string): Promise<string> {
-    return await this._service.get(id);
+
+  async get(userId: string): Promise<string> {
+    const user = await this._service.getUser(userId);
+    if (!user) {
+      return "User not found.";
+    }
+    return await this._service.get(user.userId);
   }
-  async login(email: string, password: string): Promise<any> {
+
+  async signin(email: string, password: string): Promise<any> {
     if (!email || !password) {
       return `Login - ${INVALID_INPUT}`;
     }
@@ -31,6 +37,7 @@ export class EdtechQuery implements EdtechQueryInterface {
   }
 
   async downloadMateri(userId: string, filePath: string): Promise<string> {
-    throw new Error("Method not implemented.");
+    const materi = await this.get(userId);
+    return materi;
   }
 }
