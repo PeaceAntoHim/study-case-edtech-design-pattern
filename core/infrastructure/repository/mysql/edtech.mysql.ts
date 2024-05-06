@@ -32,15 +32,28 @@ export class EdtechMysqlRepository implements EdtechRepository {
     return user;
   }
 
-  findAll(): Promise<string[]> {
-    throw new Error("Method not implemented.");
+  async findAll(): Promise<any> {
+    const materis = await this._prisma.materi.findMany({
+      where: {},
+    });
+
+    return materis;
   }
 
-  find(): Promise<string> {
-    throw new Error("Method not implemented.");
+  async find(userId: string): Promise<any> {
+    const whereCondition = userId ? { userId: userId } : {};
+    const materis = await this._prisma.materi.findMany({
+      where: whereCondition,
+    });
+
+    return materis;
   }
 
-  insert(): Promise<string> {
-    throw new Error("Method not implemented.");
+  async insert(userId: string, pathFile: string): Promise<any> {
+    const materi = await this._prisma.materi.create({
+      data: { userId: userId, material: pathFile },
+    });
+
+    return materi;
   }
 }

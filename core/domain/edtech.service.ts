@@ -21,7 +21,7 @@ export class EdtechService implements EdtechServiceInterface {
     return await this._repository.find(id);
   }
 
-  async add(pathFile: string): Promise<string> {
-    return await this._repository.insert(pathFile);
+  async add(userId: string, pathFile: string): Promise<string> {
+    return await this._repository.insert(userId, pathFile);
   }
 }
