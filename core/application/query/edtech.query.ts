@@ -16,6 +16,11 @@ export class EdtechQuery implements EdtechQueryInterface {
     if (!user) {
       return "User not found.";
     }
+
+    if (user.role != "user") {
+      return "Bad Request Auth";
+    }
+    
     return await this._service.get(user.userId);
   }
 

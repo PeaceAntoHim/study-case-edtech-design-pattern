@@ -13,6 +13,10 @@ export class EdtechCommand implements EdtechCommandInterface {
       return "User tidak di temukan";
     }
 
+    if (user.role != "tutor") {
+      return "Bad Request Auth";
+    }
+
     const material = await this._service.add(userId, pathFile);
 
     return material;
@@ -24,6 +28,8 @@ export class EdtechCommand implements EdtechCommandInterface {
   }
 
   async uploadMateri(userId: string, filePath: string): Promise<string> {
-    throw new Error("Method not implemented.");
+    const materi = await this.add(userId, filePath);
+
+    return materi;
   }
 }
