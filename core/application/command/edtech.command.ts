@@ -17,7 +17,7 @@ export class EdtechCommand implements EdtechCommandInterface {
       return "Bad Request Auth";
     }
 
-    const material = await this._service.add(user.userId, pathFile);
+    const material = await this._service.add(user.id, pathFile);
 
     return material;
   }
